@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
       primaryKey: true
     },
     life: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
     },
     strength: {
       type: DataTypes.INTEGER
