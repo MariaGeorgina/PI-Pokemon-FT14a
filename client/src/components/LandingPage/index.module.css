@@ -1,0 +1,41 @@
+.display{
+    display: flex;
+}
+
+.main {
+    background-image: url('../../images/landingPage.jpg');
+    background-color: #cccccc;
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    padding: 3%;
+    font-family: 'Lato', sans-serif;
+    height: 100%;
+}
+
+.boxDescription {
+    margin-left: 50rem;
+    margin-top: 30rem;
+    justify-content: flex-end;
+    align-items: baseline;
+}
+
+.swipeUp {
+    color: blue !important;
+    font-size: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    padding: 50px;
+    margin: 0 8%;
+}
+
+.swipeUp span {
+    font-size: 2rem;
+    color: blue;
+    font-weight: 400;
+}
+
+.swipeUp:hover{
+    transform: translate(0, -100%);
+    transition: 2s;
+}

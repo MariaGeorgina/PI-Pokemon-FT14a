@@ -1,0 +1,49 @@
+nav {
+    height: 4em;
+    display: flex;
+    padding: 0.5rem 1em;
+    z-index: 10;
+    justify-content: space-between;
+    margin: 0%;
+    background-color: whitesmoke;
+  }
+  
+  .link {
+    font-family: 'Lato', sans-serif;
+    color: #1C3C17;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    margin-left: 10%;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .active {
+    color: blue;
+    text-decoration: underline;
+  }
+  
+  .menu {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+  }
+  
+  .logoSide{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+  }
+  
+  .logo {
+    height: 100%;
+  }
+  
+  .mobileMenu{
+    display: none;
+  }
