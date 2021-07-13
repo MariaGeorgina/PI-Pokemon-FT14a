@@ -81,43 +81,48 @@ async function getPokemons(req, res) {
     }
 };
 
-async function getPokemonId(req, res) {
-    let pokeId = req.params.idPokemon;
-    if (pokeId.length < 5) {
-        try {
-            const findByPokeId = await axios(`https://pokeapi.co/api/v2/pokemon/${pokeId}`)
-            if (findByPokeId.data === undefined) { // Busca pokeapi pero falta buscar en DB
-                return res.status(404).send("Error, pokemon not found")
-            } else {
-                const found = {
-                    name: findByPokeId.data.name,
-                    id: findByPokeId.data.id,
-                    img: findByPokeId.data.sprites.front_default,
-                    hp: findByPokeId.data.stats[0].base_stat,
-                    attack: findByPokeId.data.stats[1].base_stat,
-                    defense: findByPokeId.data.stats[2].base_stat,
-                    speed: findByPokeId.data.stats[5].base_stat,
-                    height: findByPokeId.data.height,
-                    weight: findByPokeId.data.weight,
-                }
-                if (findByPokeId.data.types.length === 1) {
-                    found.types = findByPokeId.data.types[0].type.name;
-                } else {
-                    found.type = findByPokeId.data.types[0].type.name + ", " + findByPokeId.data.types[1].type.name
-                }
-                return res.json(found).status(200)
-            }
+const getPokemonId = async (req,res)=>{
+    const id = req.params.id;
+    if(!id || Number(id) < 0) return res.status(400).json({message: 'El ID es invalido 99999.'}); 
+    try {
+    if(!id.includes('-')){
+        //traigo el detalle de un poke de la API
+        const pokeDetails = await axios(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        //en un obj seteo los datos que necesito enviar
+        let pokemon = {};
+        //id\ - img\ -  type\ - height\ - weight\ -  stats [hp attack defense speed] 
+        pokemon = {     id: pokeDetails.data.id,
+                        name: pokeDetails.data.name,
+                        image: pokeDetails.data.sprites.other.dream_world.front_default,//imagen
+                        hp: pokeDetails.data.stats[0].base_stat,
+                        attack: pokeDetails.data.stats[1].base_stat,
+                        defense: pokeDetails.data.stats[2].base_stat,
+                        speed: pokeDetails.data.stats[5].base_stat,
+                        height: pokeDetails.data.height,
+                        weight: pokeDetails.data.weight,
+                        }
+                        //***los types extaerlos de la BD***
+                        let types = pokeDetails.data.types.map(type => {
+                            let obj={};
+                            return obj={name:type.type.name}
+                        });
+                        pokemon = {...pokemon,types:types };
+                        res.json(pokemon);
 
-        } catch (error) {
-            console.log(error);
-            res.status(400).send('Bad ID request, try another time!')
-        }
-    } else {
-        const isItThere = await Pokemon.findOne({ where: { id: pokeId } })//busca en la base de datos
-        if (isItThere === null) {
-            return res.status(400).send('Bad ID request, try another time!')
-        }
-        return res.json(isItThere.dataValues)
+    }else {
+        const pokemon = await Pokemon.findByPk(String(id),{
+            attributes: {exclude:['createdAt','updatedAt']},
+                    include:{
+                        model: Type,
+                        attributes:['name']
+                            }
+        });
+        pokemon?res.json(pokemon):res.status(400).json({message: 'El ID es invalido.'});
+    }
+    //validar lo que viene response.status
+    }catch (error) {
+        console.log('Error en la consulta de getPokemonID',error)
+        res.sendStatus(500,{message: 'Hubo un problema en el servidor'})
     }
 }
 
