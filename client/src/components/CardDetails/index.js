@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
-import { getPokemonDetail, getPokemonDetailReset } from "../../actions/pokemon";
-import CardDetail from '../Card/CardDetail';
+import { getPokemonId, getPokemonDetailReset } from "../../redux/actions.js";
 
-const PokemonDetail = ({ match, pokemon_detail, getPokemonDetailReset, getPokemonDetail }) => {
+
+const PokemonDetail = ({ match, pokemon_detail, getPokemonDetailReset, getPokemonId }) => {
 
   useEffect(() => {
-    getPokemonDetail(match.params.id)
+    getPokemonId(match.params.id)
     return () => { getPokemonDetailReset() }
   }, [])
 
@@ -37,7 +37,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getPokemonDetail: (pokemon) => dispatch(getPokemonDetail(pokemon)),
+    getPokemonId: (pokemon) => dispatch(getPokemonId(pokemon)),
     getPokemonDetailReset: () => dispatch(getPokemonDetailReset())
   };
 };
