@@ -1,45 +1,37 @@
-import React, { useEffect } from 'react'
-import { connect } from "react-redux";
-import { getPokemonId, getPokemonDetailReset } from "../../redux/actions.js";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
+//import './CardDetail.css';
 
-const PokemonDetail = ({ match, pokemon_detail, getPokemonDetailReset, getPokemonId }) => {
-
-  useEffect(() => {
-    getPokemonId(match.params.id)
-    return () => { getPokemonDetailReset() }
-  }, [])
-
-  return (
-    <div>
-      <Nav/>
-      <CardDetail 
-      id={pokemon_detail.id}
-      name={pokemon_detail.name}
-      img={pokemon_detail.img}
-      hp={pokemon_detail.hp}
-      attack={pokemon_detail.attack}
-      defense={pokemon_detail.defense}
-      speed={pokemon_detail.speed}
-      weight={pokemon_detail.weight}
-      height={pokemon_detail.height}
-      type={pokemon_detail.type}
-      />
-    </div>
-  )
+const CardDetail = (props) => {
+    return (
+        <div>
+            <div>
+                <div>
+                    <h5>{props.name}</h5>
+                </div>
+                <img src={props.img} alt='' />
+                <p>ID: {props.id}</p>
+            </div>
+            <div>
+                <div>
+                    <div>HP: {props.hp}</div>
+                    <div>Attack: {props.attack}</div>
+                    <div>Defense: {props.defense}</div>
+                    <div>Speed: {props.speed}</div>
+                    <div>Weight: {props.weight}</div>
+                    <div>Height: {props.height}</div>
+                    <div>Type: {props.types?.map((t) => {
+                        return<p>{t} </p>})}</div>
+                    <Link to={`/home`}>
+                        <button type='submit'>
+                            Go Back
+                        </button>
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
 };
 
-function mapStateToProps(state) {
-  return {
-    pokemon_detail: state.pokemon_detail,
-  };
-};
-
-function mapDispatchToProps(dispatch) {
-  return {
-    getPokemonId: (pokemon) => dispatch(getPokemonId(pokemon)),
-    getPokemonDetailReset: () => dispatch(getPokemonDetailReset())
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PokemonDetail);
+export default CardDetail;

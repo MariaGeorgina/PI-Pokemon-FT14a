@@ -1,23 +1,23 @@
-import axios from axios;
+import axios from 'axios';
 const GET_POKEMON_ID = 'GET_POKEMON_ID';
 const GET_POKEMONS = 'GET_POKEMONS';
 const GET_POKEMON_NAME = 'GET_POKEMON_NAME';
 const GET_POKEMON_TYPE = 'GET_POKEMON_TYPE';
 const POKEMON_DETAIL_RESET = 'POKEMON_DETAIL_RESET';
 const ADD_POKEMON = 'ADD_POKEMON';
-const POKEMON_BY_NAME_RESET = 'POKEMON_BY_NAME_RESET';
 
-export const getPokemonId = (id) => async function (dispatch) {
+
+export const getPokemonId = (id) => async (dispatch) => {
     try {
-        const result = await axios (`http://localhost:3001/pokemons/${id}`);
+        const res = await axios(`http://localhost:3001/pokemons/${id}`);
         dispatch({
-            type: GET_POKEMON_ID,
-            payload: result.data
+            type:GET_POKEMON_ID,
+            payload: res.data
         })
     } catch (error) {
-        console.log('Error de getPokemonId', error);
+        console.log('Error de GetPokemonId',error);
     }
-}
+}        
 
 export const getPokemons = () => async function (dispatch) {
     try {
@@ -55,23 +55,13 @@ export const getPokemonType = () => async function (dispatch) {
     }
 }
 
-export const getPokemonByNameReset = () => {
-    return (dispatch) => {
-        dispatch({
-            type: POKEMON_BY_NAME_RESET,
-            payload: []
-        })
-    }
-};
-
-export const getPokemonDetailReset = () => {
-    return (dispatch) => {
-        dispatch({
-            type: POKEMON_DETAIL_RESET,
-            payload: []
-        })
-    }
-};
+export const cleanDetails = ()=>(dispatch)=>{
+    let objEmpty = {};
+    dispatch({
+        type: POKEMON_DETAIL_RESET,
+        payload: objEmpty
+    })
+}
 
 export const addPokemon = (obj) => {
     return (dispatch) =>

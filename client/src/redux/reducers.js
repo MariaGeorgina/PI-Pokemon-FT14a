@@ -29,11 +29,6 @@ export const pokemonReducer = (state = initialState, action) => {
                 ...state,
                 types: action.payload
             }
-        case 'POKEMON_BY_NAME_RESET':
-            return {
-                ...state,
-                pokemonName: action.payload
-            }
         case 'POKEMON_DETAIL_RESET':
             return {
                 ...state,
