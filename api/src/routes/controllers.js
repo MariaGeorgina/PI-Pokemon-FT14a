@@ -85,6 +85,9 @@ const getPokemonId = async (req,res)=>{
     const id = req.params.id;
     if(!id || Number(id) < 0) return res.status(400).json({message: 'El ID es invalido 99999.'}); 
     try {
+    //determino si es de la API o la BD 
+        ///pasa igual
+    
     if(!id.includes('-')){
         //traigo el detalle de un poke de la API
         const pokeDetails = await axios(`https://pokeapi.co/api/v2/pokemon/${id}`);
