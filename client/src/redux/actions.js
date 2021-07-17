@@ -7,7 +7,7 @@ const POKEMON_DETAIL_RESET = 'POKEMON_DETAIL_RESET';
 const ADD_POKEMON = 'ADD_POKEMON';
 
 
-export const getPokemonId = (id) => async (dispatch) => {
+export const getPokemonDetail = (id) => async (dispatch) => {
     try {
         const res = await axios(`http://localhost:3001/pokemons/${id}`);
         dispatch({
