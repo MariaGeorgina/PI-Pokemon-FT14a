@@ -63,21 +63,10 @@ export const cleanDetails = ()=>(dispatch)=>{
     })
 }
 
-export const addPokemon = (obj) => {
-    return (dispatch) =>
-        fetch("http://localhost:3001/pokemons", {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(obj)
-        })
-            .then((answer) => answer.json())
-            .then((answer) => {
-                dispatch({
-                    type: ADD_POKEMON,
-                    payload: answer
-                })
-            })
-};
+export function addPokemon(specs) {
+	return (dispatch) => {
+		axios.post(`http://localhost:3001/pokemon`, specs).then((r) => {
+			dispatch({type: ADD_POKEMON, payload: r.data});
+		});
+	};
+}

@@ -1,47 +1,52 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getPokemons, getPokemonName } from '../../redux/actions';
+//import s from './index.module.css';
 
-//import './SearchBar.css'
+function SearchBar(props) {
 
-export const SearchBar = () => {
-    const [namePokemon, setNamePokemon] = useState('');
+  const [name, setName] = React.useState('');
+  
+  function handleChange(e) {
+      setName(e.target.value);
+  }
+  
+  function handleSubmit (event) {
+      event.preventDefault();
+      props.getPokemonName(name);
+  }
 
-    const handleChange = (e) => {
-        setNamePokemon(e.target.value);
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (namePokemon) {
-            setNamePokemon({})
-        }
-    };
-
-    return (
-        <div className='search-bar-container'>
-            <h2>Search a Pokemon</h2>
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        className='input'
-                        type='text'
-                        autoComplete='off'
-                        onChange={handleChange}
-                    />
-                    <div>
-                        <Link to={`/home/${namePokemon}`}>
-                            <button type='submit'>
-                                Search
-                            </button>
-                        </Link>
-                    </div>
-                </form>
-            </div>
-            <div>
-            </div>
-        </div >
-    );
+  return (
+      <div>
+          <form onSubmit={(e) => handleSubmit(e)}>
+              <input
+              type="text"
+              autoComplete="off"
+              value={name}
+              onInput={(e) => handleChange(e)}
+              placeholder='Pokemon'
+          />
+          <button type='Submit'>SEARCH</button>
+          </form>
+      </div>
+  )
 };
 
+const mapStateToProps = (state) => ({
+  pokemons: state.pokemons,
+  display_pokemons: state.display_pokemons
+});
 
-export default SearchBar;
+function mapDispatchToProps(dispatch) {
+    return {
+      getPokemons: function() {
+        dispatch(getPokemons())
+      },
+      getPokemonName: function(name) {
+        dispatch(getPokemonName(name))
+      }
+    }
+}
+  
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

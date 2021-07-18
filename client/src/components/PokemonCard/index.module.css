@@ -29,6 +29,7 @@
 }
 
 .name{
+    text-transform: uppercase;
     display: -webkit-flex;
     display: flex;
     -webkit-justify-content: space-evenly;
@@ -39,6 +40,7 @@
 }
 
 .type-container{
+    text-transform: uppercase;
     text-align: justify;
     display: flex;
     justify-content: center;

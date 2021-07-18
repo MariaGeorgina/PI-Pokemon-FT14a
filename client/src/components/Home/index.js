@@ -15,7 +15,8 @@ const Home = () => {
     const types2 = useSelector(store => store.types);//me carga los types que estan en el Store
     let pokemons1 = useSelector(store => store.pokemons);//carga los pokemons que están en el store
     const pokemonDetail = useSelector(store => store.pokemonDetail);
-
+   
+    
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -29,14 +30,7 @@ const Home = () => {
     useEffect (() => {
         dispatch(getPokemonType());
     }, [])
-    useEffect(() => {
-        setPokemons(pokemons1);
-    }, [pokemons1])
     
-    useEffect(() => {
-       types2.push({id:21,name:'all'})
-       setTypes(types2);
-    }, [types2])
     
     const indexOfLastPokemon = currentPage * pokemonPerPage;
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage;
