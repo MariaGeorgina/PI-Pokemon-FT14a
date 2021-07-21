@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getPokemonType, sortPokemons, filterPokemonsByType, filterPokemonsByOrigin } from "../../redux/actions";
+import { getPokemonType, sortPokemons, filterPokemonsByType, filterPokemonsBySource } from "../../redux/actions";
 
 function Filter() {
   const dispatch = useDispatch();
@@ -20,9 +20,9 @@ function Filter() {
   };
 
   //Filter by Creator
-  const handleCreator = (e) => {
+ const handleCreator = (e) => {
   
-   dispatch(filterPokemonsByOrigin(e.target.value));
+ dispatch(filterPokemonsBySource(e.target.value));
   };
 
   //Order

@@ -11,19 +11,32 @@ import s from './index.module.css';
 const Home = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const pokemonPerPage = 8;
-    
+   
+    const [firstRender, setFirstRender] = useState(true);
     const types = useSelector(store => store.types);//me carga los types que estan en el Store
     let pokemons = useSelector(store => store.pokemons);//carga los pokemons que están en el store
     const filteredPokemons = useSelector(state => state.filteredPokemons);
     //const filterBy = useSelector(state => state.filterBy);
    //const orderBy = useSelector(state => state.orderBy);
     //let allPokemons;
-
+    const [pokemonsShowed, setPokemonsShowed] = useState (pokemons);
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
+        if (firstRender === true) {
         dispatch(getPokemons());
-    }, [])
+        dispatch(getPokemonType());
+        setFirstRender(false);
+    }
+       if(filteredPokemons.length > 0) {
+           setPokemonsShowed(filteredPokemons)
+           
+       } else {
+           setPokemonsShowed(pokemons)
+    
+       }
+
+    }, [pokemons, filteredPokemons])
 
     useEffect (() => {
         dispatch(getPokemonType());
@@ -34,9 +47,9 @@ const Home = () => {
     //: (allPokemons = filteredPokemons);
     //console.log(allPokemons);
     
-    const indexOfLastPokemon = currentPage * pokemonPerPage;
-    const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage;
-    const currentPokemon = pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
+    let indexOfLastPokemon = currentPage * pokemonPerPage;
+    let indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage;
+    let currentPokemon = pokemonsShowed.slice(indexOfFirstPokemon, indexOfLastPokemon);
     const paginate = pageNumber => setCurrentPage(pageNumber);
     return (
         <div classname={s.name}>
@@ -48,7 +61,7 @@ const Home = () => {
             <Pagination
                 key={uuidv1()}
                 pokemonPerPage={pokemonPerPage}
-                totalPokemon={pokemons.length}
+                totalPokemon={pokemonsShowed.length}
                 paginate={paginate}
             />
         </div>

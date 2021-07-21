@@ -57,34 +57,26 @@ export const pokemonReducer = (state = initialState, action) => {
                 ...state,
                 pokemonCreated: action.payload
             }
-            case 'FILTER_ORIGIN_POKEMON':
-                if (action.payload === 'Created') {
-                    return {...state, filteredPokemons: state.pokemons};
-                } else if (action.payload === 'Api') {
-                    return {...state, filteredPokemons: state.pokemonsLoaded};
-                } else {
-                    return {
-                        ...state,
-                        filteredPokemons: state.pokemonsLoaded.concat(state.pokemons),
-                    };
+        case 'FILTER_TYPE_POKEMON':
+            let pokemonsToFilter = state.filteredPokemons.length > 0 ? state.filteredPokemons.map((pokemon) => pokemon) : state.pokemons.map((pokemon) => pokemon)
+            return {
+                ...state,
+                filteredPokemons: pokemonsToFilter.filter(poke=> poke.types.includes(action.payload))
                 }
-            case 'FILTER_TYPE_POKEMON':
-                if (action.payload === 'All') {
-                    return {...state, pokemonsShowed: state.filteredPokemons};
-                } else {
-                    return {
-                        ...state,
-                        pokemonsShowed: state.filteredPokemons.filter((el) =>
-                            el.types.includes(action.payload)
-                        ),
-                    };
-                }
-        case 'SORT_POKEMONS':
+        case 'SORT_POKEMONS': {
+            let pokemonsToOrder = state.filteredPokemons.length > 0 ? state.filteredPokemons.map((pokemon) => pokemon) : state.pokemons.map((pokemon) => pokemon)
             return {
            ...state,
-            filteredPokemons: orderPokemons(action.payload, state.pokemons)  
+            filteredPokemons: orderPokemons(action.payload, pokemonsToOrder)  
         }
-       
+    }
+        case 'FILTER_BY_SOURCE': {
+            let pokemonsBySource = state.filteredPokemons.length > 0 ? state.filteredPokemons.map((pokemon) => pokemon) : state.pokemons.map((pokemon) => pokemon)
+            return {
+                ...state,
+                filteredPokemons: pokemonsBySource.filter(poke => poke.hasOwnProperty('dataBase'))
+            }
+        }
         default:
             return state;
         }

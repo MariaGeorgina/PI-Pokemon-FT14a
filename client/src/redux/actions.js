@@ -5,7 +5,7 @@ const GET_POKEMON_NAME = 'GET_POKEMON_NAME';
 const GET_POKEMON_TYPE = 'GET_POKEMON_TYPE';
 const POKEMON_DETAIL_RESET = 'POKEMON_DETAIL_RESET';
 const ADD_POKEMON = 'ADD_POKEMON';
-const FILTER_ORIGIN_POKEMON = 'FILTER_ORIGIN_POKEMON';
+const FILTER_BY_SOURCE = 'FILTER_BY_SOURCE';
 const FILTER_TYPE_POKEMON= 'FILTER_TYPE_POKEMON';
 const SORT_POKEMONS = 'SORT_POKEMONS';
 
@@ -81,16 +81,10 @@ export const sortPokemons = (sort) => (dispatch) => {
 }
 
 //FILTROS
-export function filterPokemonsByType(type) {
-	return {
-		type: FILTER_TYPE_POKEMON,
-		payload: type,
-	};
-}
+export const filterPokemonsByType = (type)=> (dispatch)=> {
+    dispatch({ type: FILTER_TYPE_POKEMON, payload: type })
+    }
 
-export function filterPokemonsByOrigin(type) {
-	return {
-		type: FILTER_ORIGIN_POKEMON,
-		payload: type,
-	};
+export const filterPokemonsBySource = (source) => (dispatch) => {
+    dispatch ({ type: FILTER_BY_SOURCE, payload: source });
 }

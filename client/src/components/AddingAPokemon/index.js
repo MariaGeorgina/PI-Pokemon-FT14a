@@ -108,7 +108,7 @@ function Form() {
   };
 
   return (
-    <>
+    <div className={s.back}>
       <div className={s.containerForm}>
         <header>
           <h1 className={s.title}>Create your pokemon!</h1>
@@ -234,7 +234,7 @@ function Form() {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 
