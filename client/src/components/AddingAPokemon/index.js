@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addPokemon, getPokemonType } from "../../redux/actions";
+import { addPokemon, getPokemonType, sortPokemons } from "../../redux/actions";
 import { Link } from "react-router-dom";
-
+import s from './index.module.css';
 
 function Form() {
   const dispatch = useDispatch();
@@ -22,16 +22,15 @@ function Form() {
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    // console.log([name, value]);
-    // console.log(target.value);
+  
     if (name === "types") {
       const arr = state[name];
-      // console.log(arr);
+     
       setState({
         ...state,
         [name]: arr.concat(target.value),
       });
-      // console.log(state[name]);
+  
     } else {
       setState({
         ...state,
@@ -110,90 +109,125 @@ function Form() {
 
   return (
     <>
-      <div>
+      <div className={s.containerForm}>
         <header>
-          <h1 id="title">Create your pokemon!</h1>
+          <h1 className={s.title}>Create your pokemon!</h1>
         </header>
         <form
           id="survey-form"
+          className={s.form}
           noValidate
           onChange={(e) => ChangeInput(e)}
           onSubmit={(e) => handleSubmit(e)}
         >
-          <div>
-            <div>
+          <div className={s.divform}>
+          <div className={s.formItems}>
+              <div className={s.formItems1}>
               <label>NAME</label>
+              </div>
+              <div>
               <input
+                className={s.btm}
                 type="text"
                 name="name"
                 value={state.name}
               ></input>
-            </div>
-            <div>
+          </div>
+          </div>
+            <div className={s.formItems}>
+              <div className={s.formItems1}>
               <label>HP</label>
+              </div>
+              <div>
               <input
+                className={s.btm}
                 type="number"
                 name="hp"
                 value={state.hp}
               ></input>
+              </div>
             </div>
-            <div>
+            <div className={s.formItems}>
+              <div className={s.formItems1}>
               <label>ATTACK</label>
+              </div>
+              <div>
               <input
+                className={s.btm}
                 type="number"
                 name="attack"
                 value={state.attack}
               ></input>
+              </div>
             </div>
-            <div>
+            <div className={s.formItems}>
+              <div className={s.formItems1}>
               <label>DEFENSE</label>
+              </div>
+              <div>
               <input
+                className={s.btm}
                 type="number"
                 name="defense"
                 value={state.defense}
               ></input>
+              </div>
             </div>
-            <div>
+            <div className={s.formItems}>
+              <div className={s.formItems1}>
               <label>SPEED</label>
+              </div>
+              <div>
               <input
+                className={s.btm}
                 type="number"
                 name="speed"
                 value={state.speed}
               ></input>
+              </div>
             </div>
-            <div>
+            <div className={s.formItems}>
+              <div className={s.formItems1}>
               <label>HEIGHT</label>
+              </div>
+              <div>
               <input
+                className={s.btm}
                 type="number"
                 name="height"
                 value={state.height}
               ></input>
+              </div>
             </div>
-            <div>
+            <div className={s.formItems}>
+              <div className={s.formItems1}>
               <label>WEIGHT</label>
+              </div>
+              <div>
               <input
+                className={s.btm}
                 type="number"
                 name="weight"
                 value={state.weight}
               ></input>
+              </div>
             </div>
             <div>
               <label>TYPES</label>
-              <div>
-                <ul>
+              <div className={s.inputTypes}>
                   {types.map((t) => (
-                    <li key={t.typeId}>
+                    <div key={t.typeId} className={s.type}>
                       <input
+                        classname={s.input}
                         type="checkbox"
                         name="types"
                         value={t.name}
                       ></input>
                       <label name={t}>{t.name}</label>
-                    </li>
+                    </div>
                   ))}
-                </ul>
               </div>
-              <button type="submit">
+              <button className={s.submitForm} type="submit">
                 Create Pokemon
               </button>
             </div>

@@ -3,19 +3,19 @@ import { Link } from 'react-router-dom';
 import './index.module.css';
 import s from './index.module.css';
 
-const PokemonCard = ({id, name, img, types}) => {
+const PokemonCard = (props) => {
   
   return (
     <div className={s.card}>
-            <img src={img} alt='' className={s.cardImg} /> 
+            <img src={props.img} alt='' className={s.cardImg} /> 
         <div className={s.name}>
-            <h3>{name}</h3>
+            <h3>{props.name}</h3>
         </div>
             <div className='type-container'>
               <h3>Types:</h3><br></br>
-                <p>{types}</p>
+                <p className={s.typing}>{props.types}</p>
             </div>
-                <Link to={`/home/${id}`}>
+                <Link to={`/home/${props.id}`}>
               <button type='submit'>
                 More Details
               </button>

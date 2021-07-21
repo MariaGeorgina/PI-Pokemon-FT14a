@@ -55,6 +55,10 @@
     -webkit-flex-wrap: wrap;
 }
 
+.typing{
+    text-transform: capitalize;
+}
+
 .card button{
     background-image: linear-gradient(to right, #af8db2 0%, #a27aa5  51%, #956799  100%);
     font-size: 17px;

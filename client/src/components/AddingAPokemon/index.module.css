@@ -1,0 +1,127 @@
+.containerForm{
+    display: flex;
+    flex-direction: column;
+    border: black;
+    border-style: solid;
+    flex-wrap: wrap;
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-top: 30px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    background-color: rgba(128, 128, 128, 0.76);
+}
+
+  header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .containerForm .form {
+    background-color: transparent;
+    border-radius: 10rem;
+    height: 135vh;
+    width: 50%;
+    padding: 20px 50px;
+    color: black;
+    margin-bottom: 30px;
+    position: relative;
+  }
+
+  .containerForm.divform {
+    margin: 10px 0;
+    padding: 10px;
+    border-bottom: 2px solid #eee;
+    text-align: center;
+  }
+
+  .label {
+    --clr-primary-5: hsl(22, 31%, 52%);
+    font-size: 1.1rem;
+    border: 0.2rem solid rgba(0, 0, 0, 0.2);
+    background-color: rgba(4, 0, 43, 0.692);
+    border-radius: 0.3rem;
+    color: var(--clr-primary-5);
+  }
+
+  .containerForm .btm,
+.containerForm button {
+  width: 60%;
+  border-radius: 30px;
+}
+
+.containerForm .btm:focus {
+    background-color: yellow;
+    color: #f0f0f0;
+  }
+  .btm {
+    outline: none;
+    height: 35px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 0 0 0 10px;
+    width: 0%;
+    margin: 5px 0;
+    color: rgba(0, 0, 0, 0.7);
+  }
+  .ultypes {
+    display: grid;
+    grid-gap: 2% 0;
+    grid-template-columns: repeat(3, 5fr);
+    align-items: center;
+    height: 80%;
+  }
+  .submitForm {
+    height: 3rem;
+    margin-top: 2rem;
+    background-color: rgba(21, 43, 0, 0.692);
+    color: #f0f0f0;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  .input-item{
+    width: 400px;
+}
+.form-items{
+    display: flex;
+    justify-content: space-between;
+    font-size: medium;
+    font-family: montserrat;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.form-items1{
+    margin-left: 15px;
+    margin-right: 15px;
+    justify-content: center;
+}
+.inputTypes {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .form h2 {
+    text-align: center;
+    font-family: montserrat;
+    text-transform: uppercase;
+  }
+  .type {
+    border: 1px dashed black;
+    margin: 3px;
+    padding: 2px;
+  }
+  
+  .submitForm:hover {
+    padding: 8px 10px;
+    border: 5px solid #ccc;
+    border-radius: 5px;
+    background-color: #eee;
+    text-transform: uppercase;
+    margin: 10px;
+    font-weight: bold;
+  }

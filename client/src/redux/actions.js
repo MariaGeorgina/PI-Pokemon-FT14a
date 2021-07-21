@@ -5,6 +5,9 @@ const GET_POKEMON_NAME = 'GET_POKEMON_NAME';
 const GET_POKEMON_TYPE = 'GET_POKEMON_TYPE';
 const POKEMON_DETAIL_RESET = 'POKEMON_DETAIL_RESET';
 const ADD_POKEMON = 'ADD_POKEMON';
+const FILTER_ORIGIN_POKEMON = 'FILTER_ORIGIN_POKEMON';
+const FILTER_TYPE_POKEMON= 'FILTER_TYPE_POKEMON';
+const SORT_POKEMONS = 'SORT_POKEMONS';
 
 
 export const getPokemonDetail = (id) => async (dispatch) => {
@@ -68,5 +71,26 @@ export function addPokemon(specs) {
 		axios.post(`http://localhost:3001/pokemon`, specs).then((r) => {
 			dispatch({type: ADD_POKEMON, payload: r.data});
 		});
+	};
+}
+
+
+//ORDERS
+export const sortPokemons = (sort) => (dispatch) => {
+    dispatch ({ type: SORT_POKEMONS, payload: sort });
+}
+
+//FILTROS
+export function filterPokemonsByType(type) {
+	return {
+		type: FILTER_TYPE_POKEMON,
+		payload: type,
+	};
+}
+
+export function filterPokemonsByOrigin(type) {
+	return {
+		type: FILTER_ORIGIN_POKEMON,
+		payload: type,
 	};
 }

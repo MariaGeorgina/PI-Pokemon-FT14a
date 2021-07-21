@@ -12,7 +12,7 @@ const LandingPage = () => {
             <div className={[s.boxDescription, s.flex].join(' ')}>
             </div>
                 <div className={s.swipeUp}>
-                    <Link to="/pokemons" >
+                    <Link to="/home" >
                         <FaAngleDoubleUp style={{color: `blue`}}/>
                             <span>Swipe up</span>
                     </Link>

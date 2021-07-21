@@ -4,7 +4,6 @@ import React from 'react';
 import NavBar from './components/NavBar';
 import PokemonDetails from './components/PokemonDetails/pokemonDetail';
 import Home from './components/Home';
-import GetPokemonType from './components/Types';
 import Form from './components/AddingAPokemon';
 
 function App() {
@@ -15,9 +14,8 @@ function App() {
     <React.Fragment>
       <NavBar isMobile={isMobile}/>
       <Route exact path='/' component={LandingPage} />
-      <Route exact path='/' component={GetPokemonType} />
       <Route exact path='/home' component={Home} />
-      <Route exact path='/home/pokemon/search' component={Form} />
+      <Route exact path='/addPokemon' component={Form} />
       <Route exact path='/pokemon/:id' component={PokemonDetails}/>
     </React.Fragment>
   );

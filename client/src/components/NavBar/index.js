@@ -14,7 +14,7 @@ const NavBar = ({ isMobile }) => {// renders the NavBar if it isn't a mobile dev
                 <FaBars/>
             </div>
             <div className={s.menu}>
-                <NavLink to="/pokemons" className={s.link} activeClassName={s.active}>Home</NavLink>
+                <NavLink to="/home" className={s.link} activeClassName={s.active}>Home</NavLink>
                 <NavLink to="/addPokemon" className={s.link} activeClassName={s.active}>Add your own</NavLink>
             </div>
         </nav>
