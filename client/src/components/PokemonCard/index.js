@@ -13,9 +13,13 @@ const PokemonCard = (props) => {
         </div>
             <div className='type-container'>
               <h3>Types:</h3><br></br>
-                <p className={s.typing}>{props.types}</p>
+               <p className={s.typing}>{typeof props.id !== 'number' && props.types ? props.types.map((type) => type.name).join(", ")  
+: props.types && props.types.length > 0 ? 
+  props.types
+  : props.type ? props.type : null}</p>
             </div>
                 <Link to={`/home/${props.id}`}>
+                  
               <button type='submit'>
                 More Details
               </button>

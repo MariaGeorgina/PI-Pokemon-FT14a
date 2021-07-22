@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addPokemon, getPokemonType, sortPokemons } from "../../redux/actions";
-import { Link } from "react-router-dom";
+import { addPokemon, getPokemonType } from "../../redux/actions";
 import s from './index.module.css';
 
 function Form() {
@@ -18,6 +17,17 @@ function Form() {
     weight: null,
     types: [],
   });
+
+  function handleCheck(e) {
+    if(e.target.value) {
+      console.log(e.target.value)
+      setState({ ...state, types:
+      [...state.types, e.target.value]});
+    } else {
+      setState({ ...state, types:
+      state.types.filter((pokemon) => pokemon !== e.target.value)})
+    };
+  };
 
   const ChangeInput = (e) => {
     const target = e.target;
@@ -54,8 +64,8 @@ function Form() {
       speed: state.speed,
       height: state.height,
       weight: state.weight,
-      typeId: state.types[0],
-      typeId2: state.types[1],
+      types: state.types,
+      
     };
 
     if (!poke.name) {
@@ -86,7 +96,7 @@ function Form() {
       alert("Please, give some weight to your poke!");
       return;
     }
-    if (!poke.typeId) {
+    if (!poke.types) {
       alert("Dont forget to add a type to your poke!");
       return;
     }
@@ -222,7 +232,7 @@ function Form() {
                         type="checkbox"
                         name="types"
                         value={t.name}
-                      ></input>
+                        onChange={(e) => handleCheck(e)}/>
                       <label name={t}>{t.name}</label>
                     </div>
                   ))}

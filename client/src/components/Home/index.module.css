@@ -1,8 +1,10 @@
-.main{
-        background-image: url('../../images/fondo.gif') no-repeat center center fixed;
-        -webkit-backdrop-size: cover;
-        -moz-backgraound-size: cover;
-        -o-background-size: cover; 
-        background-size: cover; 
-        height: 100%;
-    } 
+.home {
+	padding: 10px;
+	background: rgb(0, 0, 0);
+	background: linear-gradient(
+		0deg,
+		rgba(0, 0, 0, 1) 0%,
+		rgba(254, 218, 0, 1) 71%
+	);
+	min-height: 100vh;
+}

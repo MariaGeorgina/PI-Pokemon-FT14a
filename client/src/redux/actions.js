@@ -8,7 +8,7 @@ const ADD_POKEMON = 'ADD_POKEMON';
 const FILTER_BY_SOURCE = 'FILTER_BY_SOURCE';
 const FILTER_TYPE_POKEMON= 'FILTER_TYPE_POKEMON';
 const SORT_POKEMONS = 'SORT_POKEMONS';
-
+const RESET = 'RESET';
 
 export const getPokemonDetail = (id) => async (dispatch) => {
     try {
@@ -68,12 +68,17 @@ export const cleanDetails = ()=>(dispatch)=>{
 
 export function addPokemon(specs) {
 	return (dispatch) => {
-		axios.post(`http://localhost:3001/pokemon`, specs).then((r) => {
+		axios.post(`http://localhost:3001/pokemon`, specs, {
+            headers: { "Content-Type": "application/json" },
+          }).then((r) => {
 			dispatch({type: ADD_POKEMON, payload: r.data});
 		});
 	};
 }
-
+export const resetAll = () => (dispatch) => {
+      dispatch({ type: RESET });
+    };
+  
 
 //ORDERS
 export const sortPokemons = (sort) => (dispatch) => {

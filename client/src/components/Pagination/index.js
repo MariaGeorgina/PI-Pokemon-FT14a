@@ -9,24 +9,22 @@ const Pagination = ({ pokemonPerPage, totalPokemon, paginate }) => {
     }
 
     return (
-        <div classname={s.ctn}>
-            <nav className={s.pagination}>
-                <ul>
-            {
-                pageNumbers.map(number => (
-                    <div classname={s.pagDiv} key={number}>
-                        <li key={number} >
-                            <a onClick={() => paginate(number)} href="#" className='page-link'>
-                                {number}
-                            </a>
-                            </li>
-                    </div>
-                ))
-            }
-                </ul>
-            </nav>
+        <div className={s.ctn}>
+                    {
+                    pageNumbers.map(number => (
+                        <div key={number} className={s.pagDiv}>
+                            <button className='button-pagination' key={number} onClick={() => paginate(number)}>{number}</button> 
+                                
+                            
+                        </div>
+                        
+                    ))
+                    }
+                    
+        
         </div>
     )
 }
+
 
 export default Pagination;

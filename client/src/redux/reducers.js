@@ -45,7 +45,7 @@ export const pokemonReducer = (state = initialState, action) => {
         case 'GET_POKEMON_NAME':
             return {
                 ...state,
-                pokemonName: action.payload
+                pokemonName: [action.payload]
             }
         case 'GET_POKEMON_TYPE':
             return {
@@ -77,6 +77,15 @@ export const pokemonReducer = (state = initialState, action) => {
                 filteredPokemons: pokemonsBySource.filter(poke => poke.hasOwnProperty('dataBase'))
             }
         }
+        case 'RESET': {
+            return {
+              ...state,
+              pokemons: [],
+              pokemonName: [],
+              filteredPokemons: [],
+              types: [],
+            };
+          }
         default:
             return state;
         }

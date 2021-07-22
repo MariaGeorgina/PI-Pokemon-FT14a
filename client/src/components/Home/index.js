@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Cards from '../Cards';
 import Pagination from '../Pagination';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPokemons, getPokemonType, sortPokemons } from '../../redux/actions';
+import { getPokemons, getPokemonType } from '../../redux/actions';
 import { v1 as uuidv1 } from "uuid";
 import SearchBar from '../SearchBar';
 import Filter from '../Filter/index';
@@ -10,7 +10,7 @@ import s from './index.module.css';
 
 const Home = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const pokemonPerPage = 8;
+    const pokemonPerPage = 12;
    
     const [firstRender, setFirstRender] = useState(true);
     const types = useSelector(store => store.types);//me carga los types que estan en el Store
@@ -19,6 +19,7 @@ const Home = () => {
     //const filterBy = useSelector(state => state.filterBy);
    //const orderBy = useSelector(state => state.orderBy);
     //let allPokemons;
+    const pokemonName = useSelector(store => store.pokemonName);
     const [pokemonsShowed, setPokemonsShowed] = useState (pokemons);
     const dispatch = useDispatch();
     
@@ -31,12 +32,15 @@ const Home = () => {
        if(filteredPokemons.length > 0) {
            setPokemonsShowed(filteredPokemons)
            
-       } else {
+       } else if (pokemonName.length > 0) {
+        setPokemonsShowed(pokemonName)
+       }
+       else {
            setPokemonsShowed(pokemons)
     
-       }
+       } 
 
-    }, [pokemons, filteredPokemons])
+    }, [pokemons, filteredPokemons, pokemonName])
 
     useEffect (() => {
         dispatch(getPokemonType());
@@ -52,7 +56,7 @@ const Home = () => {
     let currentPokemon = pokemonsShowed.slice(indexOfFirstPokemon, indexOfLastPokemon);
     const paginate = pageNumber => setCurrentPage(pageNumber);
     return (
-        <div classname={s.name}>
+        <div className={s.home}>
             <SearchBar />
             <Filter />
                 <div>
