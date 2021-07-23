@@ -7,7 +7,7 @@ sequelize.define('type', {
         primaryKey: true
     },
     name: {
-      type: DataTypes.STRING// falta id primary key
+      type: DataTypes.STRING//
     }
   }, { timestamps: false})
 }

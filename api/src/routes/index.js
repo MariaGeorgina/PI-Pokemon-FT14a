@@ -1,5 +1,5 @@
 const { Router, static } = require('express');
-const { getPokemons, getPokemonId, createNewPokemon, getTypes } = require('./controllers.js');
+const { getPokemons, getPokemonId, getTypes, postNewPokemon } = require('./controllers.js');
 
 const router = Router();
 
@@ -7,7 +7,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 router.get('/pokemons', getPokemons);
 router.get('/pokemons/:id', getPokemonId);
-router.post('/pokemon', createNewPokemon);
+router.post('/pokemon', postNewPokemon);
 router.get('/type', getTypes);
 
 module.exports = router;

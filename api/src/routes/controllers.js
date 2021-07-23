@@ -1,53 +1,37 @@
 const axios = require ('axios');
 const { Pokemon, Type } = require ('../db');
-const { v4: uuidv1 } = require('uuid');
+//const Type = require('../models/Types');
 
-async function createNewPokemon(req, res) {
-    const id = uuidv1();
-    let data = { ...req.body, id }; //id, name, image, strength
-    if (!req.body.name) return res.status(400).send('Body vacio!!!');
-    try {
-        const createdPoke = await Pokemon.create(data)//crea el pokemon con la data que le paso por body
-        await createdPoke.addTypes(req.body.type, { through: 'pokemon_type' })// hay algunos que tienen dos tipos
-        await createdPoke.addTypes(req.body.type2, { through: 'pokemon_type' })
-        const poke_type = await Pokemon.findOne({// encuentra un pokemon en la base de datos y los devuelve
-            where: { name: req.body.name },
-            include: Types
+const postNewPokemon =  async (req,res)=>{
+
+    let {name, image, hp, attack, defense, speed, height, weight, types } = req.body;
+    if(!name ) {
+        return res.status(400).json({message: 'Los datos enviados no son correctos.'});}
+    name = name.toLowerCase();
+    let dataBase = true;
+    let pokeNew = await Pokemon.create({
+        image,
+        name,
+        hp,
+        attack,
+        defense,
+        speed,
+        height,
+        weight,
+        dataBase
+    });
+    types.forEach(async (type) => {
+        let dbTypes = await Type.findOne({
+          where: {
+            name: type,
+          },
         });
-        return res.json(poke_type)// encuentra un pokemon y lo devuelve
-    }
-    catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error')
-    }
-};
+    await pokeNew.addType(dbTypes);
+    })
+    res.json(`${pokeNew.name}`);
+}
 async function getPokemons(req, res) {
-    let pokeArray = [];
-    if (pokeArray.length < 12) {
-        try {
-            let pokeResults = await axios(`https://pokeapi.co/api/v2/pokemon`)
-            for (let i = 0; i < 12; i++) {
-                let pokeI = await axios(pokeResults.data.results[i].url)
-                let eachPoke = {}
-                pokeI.data.types.length === 1 ? (eachPoke = {
-                    name: pokeI.data.name,
-                    img: pokeI.data.sprites.front_default,
-                    types: pokeI.data.types[0].type.name
-                }) :
-                    (eachPoke = {
-                        name: pokeI.data.name,
-                        img: pokeI.data.sprites.front_default,
-                        types: pokeI.data.types[0].type.name + ", " + pokeI.data.types[1].type.name
-                    })
-                pokeArray.push(eachPoke);
-            }
-        }
-        catch (error) {
-            console.log(error);
-            res.status(500).send('Internal Server Error')
-        }
-    }
-    if (req.query.name) {
+if (req.query.name) {
         let queryName = req.query.name.toLowerCase();
         const isItThere = await Pokemon.findOne({ where: { name: queryName } })//1ero lo busco en la base de datos
         if (isItThere === null) {
@@ -77,10 +61,63 @@ async function getPokemons(req, res) {
         }
         return res.json(isItThere.dataValues)//null
     } else {
-        res.status(200).send(pokeArray)//devuelve los 12 pokemones
-    }
+    let pokeArray = [];
+    console.log(pokeArray);
+    if (pokeArray.length < 20) {
+        try {
+            let pokeResults = await axios(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=20`)
+            
+            for (let i = 0; i < 20; i++) {
+                let pokeI = await axios(pokeResults.data.results[i].url)
+                
+                let eachPoke = {}
+            
+                pokeI.data.types.length === 1 ? (eachPoke = {
+                    name: pokeI.data.name,
+                    id: pokeI.data.id,
+                    img: pokeI.data.sprites.front_default,
+                    attack: pokeI.data.stats[1].base_stat,
+                    types: pokeI.data.types[0].type.name
+                }) :
+                    (eachPoke = {
+                        name: pokeI.data.name,
+                        id: pokeI.data.id,
+                        img: pokeI.data.sprites.front_default,
+                        attack: pokeI.data.stats[1].base_stat,
+                        types: pokeI.data.types[0].type.name + ", " + pokeI.data.types[1].type.name
+                    })
+                pokeArray.push(eachPoke);
+                console.log(pokeArray)
+            }
+       const pokemonDB = await Pokemon.findAll({
+           
+        include: [
+            {
+              model: Type,
+              as: "types",
+              attributes: ["id", "name"],
+              through: {
+                attributes: [],
+              },
+            },
+          ],
+       })
+       let allPokemons = [];
+        pokemonDB.length > 0 ? allPokemons = pokeArray.concat(pokemonDB) : allPokemons= pokeArray
+        res.status(200).send(allPokemons)
+        console.log(allPokemons)
+        } //devuelve los  pokemones
+        
+        catch (error) {
+            console.log(error);
+            res.status(500).send('Internal Server Error')
+        }
+    } 
 };
+}
 
+    
+    
 const getPokemonId = async (req,res)=>{
     const id = req.params.id;
     if(!id || Number(id) < 0) return res.status(400).json({message: 'El ID es invalido 99999.'}); 
@@ -142,7 +179,7 @@ async function getTypes(req, res) {
                     }
                 });
             }
-            return res.redirect('/types');
+           
         }
         catch (error) {
             console.log(error);
@@ -155,6 +192,6 @@ async function getTypes(req, res) {
 module.exports = {
     getPokemons,
     getPokemonId,
-    createNewPokemon,
+    postNewPokemon,
     getTypes
 }
