@@ -4,6 +4,7 @@ import { FaBars } from 'react-icons/fa';
 import logo from '../../images/logo.jpg';
 import s from './index.module.css';
 
+
 const NavBar = ({ isMobile }) => {// renders the NavBar if it isn't a mobile device
     return (
         <nav>

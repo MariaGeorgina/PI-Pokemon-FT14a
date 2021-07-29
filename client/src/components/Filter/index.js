@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPokemonType, sortPokemons, filterPokemonsByType, filterPokemonsBySource } from "../../redux/actions";
 
+
 function Filter() {
   const dispatch = useDispatch();
   const types = useSelector((store) => store.types);
@@ -35,7 +36,7 @@ function Filter() {
     <div>
       <form className="form-control">
         <div>
-          <p className="title-filter">Filter by Type</p>
+          <p>Filter by Type</p>
           <select className="search-input" onChange={(e) => handleFilter(e)}>
             <option default>All</option>
             {types.map((t) => (
@@ -46,7 +47,7 @@ function Filter() {
           </select>
         </div>
         <div>
-          <p className="title-filter">Filter by Creator</p>
+          <p>Filter by Source</p>
           <select className="search-input" onChange={(e) => handleCreator(e)}>
             <option value='All'>All</option>
             <option value="Api">Api Pokemons</option>

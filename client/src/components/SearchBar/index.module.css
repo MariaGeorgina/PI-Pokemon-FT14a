@@ -1,5 +1,29 @@
-.searchBar{
+.searchBox{
     display: flex;
-    flex-direction: column;
-    align-content: center;
+    justify-content: center;
+}
+
+.btn{
+    margin: 5px;
+    padding: 5px;
+    border:2px solid white;
+    border-radius: 5px;
+    color:white;
+    background-color: #db0303;
+    
+}
+
+.btn:hover{
+    border:2px solid #db0303;
+    
+    color: #db0303;
+    background-color: transparent;
+}
+
+input{
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    
 }
