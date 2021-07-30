@@ -118,7 +118,7 @@ function Form() {
   };
 
   return (
-    <div className={s.back}>
+    <div className={s.body}>
       <div className={s.containerForm}>
         <header>
           <h1 className={s.title}>Create your pokemon!</h1>
@@ -130,10 +130,10 @@ function Form() {
           onChange={(e) => ChangeInput(e)}
           onSubmit={(e) => handleSubmit(e)}
         >
-          <div className={s.divform}>
+          <div>
           <div className={s.formItems}>
               <div className={s.formItems1}>
-              <label>NAME</label>
+              <label className={s.textLabel}>NAME</label>
               </div>
               <div>
               <input
@@ -224,7 +224,7 @@ function Form() {
             </div>
             <div>
               <label>TYPES</label>
-              <div className={s.inputTypes}>
+              <div className={s.ulTypes}>
                   {types.map((t) => (
                     <div key={t.typeId} className={s.type}>
                       <input

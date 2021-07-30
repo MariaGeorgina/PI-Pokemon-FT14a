@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPokemonType, sortPokemons, filterPokemonsByType, filterPokemonsBySource } from "../../redux/actions";
-
+import s from './index.module.css';
 
 function Filter() {
   const dispatch = useDispatch();
@@ -33,11 +33,11 @@ function Filter() {
   
 
   return (
-    <div>
-      <form className="form-control">
-        <div>
+    <div className={s.filters}>
+      <form className={s.formControl}>
+        <div className={s.types}>
           <p>Filter by Type</p>
-          <select className="search-input" onChange={(e) => handleFilter(e)}>
+          <select className={s.searchInput} onChange={(e) => handleFilter(e)}>
             <option default>All</option>
             {types.map((t) => (
               <option key={t.typeId} value={t.name}>
@@ -46,17 +46,17 @@ function Filter() {
             ))}
           </select>
         </div>
-        <div>
+        <div className={s.source}>
           <p>Filter by Source</p>
-          <select className="search-input" onChange={(e) => handleCreator(e)}>
+          <select className={s.searchInput} onChange={(e) => handleCreator(e)}>
             <option value='All'>All</option>
             <option value="Api">Api Pokemons</option>
             <option value="Created">Created Pokemons</option>
           </select>
         </div>
-        <div>
-          <p className="title-filter">Order</p>
-          <select className="search-input" onChange={(e) => handleOrder(e)}>
+        <div className={s.order}>
+          <p>Order</p>
+          <select className={s.searchInput} onChange={(e) => handleOrder(e)}>
             <option default>Select</option>
             <option value="asc_name">Alphabetically (A-Z)</option>
             <option value="desc_name">Alphabetically (Z-A)</option>
