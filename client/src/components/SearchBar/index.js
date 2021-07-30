@@ -22,8 +22,9 @@ function SearchBar(props) {
     <div className={s.searchBox}>
       <div>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <div className={s.input}>
+          <div>
             <input
+              className={s.input}
               placeholder='Search a Pokemon'
               name='title'
               type="text"
