@@ -8,11 +8,11 @@
     width: 250px;
     height: 400px;
     text-align: center;
-    background-color: #cab3cc;
+    background-color: tomato;
     border-radius: 16px;
     margin: 32px;
     border: 1.6px solid hsla(0,0%,100%,.4);
-    color: #49274c;
+    color: black;
     box-shadow: 3px 3px 16px rgb(20 20 20 / 80%); 
 }
 
@@ -37,6 +37,7 @@
     -webkit-align-items: flex-end;
     align-items: flex-end;
     font-size: 20px;
+    font-weight: 800;
 }
 
 .type-container{
@@ -60,7 +61,7 @@
 }
 
 .card button{
-    background-image: linear-gradient(to right, #af8db2 0%, #a27aa5  51%, #956799  100%);
+    background-color: limegreen;
     font-size: 17px;
     position: absolute;
     right: 25px;
@@ -71,7 +72,7 @@
 }
 
 .card button:hover{
-    background-image: linear-gradient(to right, #956799 0%, #87548c  51%, #7f3e85  100%);
+   background-color: blue;
    transition: transform .5s ease;
    transform: scale(1.1);
 }
