@@ -5,7 +5,7 @@
     margin:2%;
     display: flex;
     justify-content: center;
-
+    background-color: darkblue;
 }
 .card{
     width: 50%;
@@ -13,6 +13,7 @@
     border: 1px solid black;
     display: flex;
     flex-direction: column;
+    background-color: rgba(255,255,255,0.8);
 }
 
 .divImg{
@@ -32,7 +33,7 @@
 .name{
     text-transform: uppercase;
     border: 1px solid black;
-    background-color: #db0303;
+    background-color: tomato;
     text-align: center;
     font-weight: bold;
     color: white;
@@ -42,7 +43,7 @@
 }
 .id{
     border: 1px solid black;
-    background-color: #1547b4;
+    background-color: limegreen;
     text-align: center;
     font-weight: bold;
     color: white;
@@ -69,6 +70,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: blue;
 }
 .abiData{
     width: 100%;

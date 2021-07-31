@@ -5,7 +5,7 @@
     margin-bottom: 10px;
     padding: 20px;
     justify-content: space-around;
-    border: 5px solid #ccc;
+    border: 5px solid black;
     border-radius: 10px;
     background-color: rgba(128, 128, 128, 0.76);
 }
@@ -16,7 +16,7 @@
 }
 
 .searchInput{
-    background-color: #11c035;
+    background-color: limegreen;
     width: 173px;
     height: 35px;
     border: 2px solid black;
